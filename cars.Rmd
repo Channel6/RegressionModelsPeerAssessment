@@ -89,3 +89,5 @@ The residual plots also seems to be randomly scattered, see below:
 par(mfrow = c(2,2))
 plot(fittedmodel)
 ```
+## Conclusion
+On average, manual transmission is better than automatic transmission by 2.9 MPG. However, transmission type is not the only factor accounting for MPG, weight, and acceleration (quarter-mile time) also needs to be considered.
