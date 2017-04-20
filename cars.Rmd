@@ -42,6 +42,15 @@ plot(density(mtcars$mpg), main="Kernel density", xlab="MPG")
 ```
 It appears that the data is approximately normal, or perhaps right skewed.
 ### Is an automatic or manual transmission better for MPG?
+First, some dissonance between the two transmission types. A quick summary to follow.
+Automatic:
+```{r echo=TRUE}
+summary(mtcars[mtcars$am == 0,])
+```
+Manual:
+```{r echo=TRUE}
+summary(mtcars[mtcars$am == 1,])
+```
 Create a boxplot of MPG by transmission types.
 ```{r echo=TRUE}
 boxplot(mpg ~ am,
@@ -51,4 +60,9 @@ boxplot(mpg ~ am,
 	main = "MPG by Transmission Type",
 	names = c("Automatic", "Manual")
 )
+```
+Ostensibly, given that the mean of manual is higher than that of automatic transmissions, we have a good hypothesis that manuals get better mileage than automatic transmissions.
+A t-test is appropriate here:
+```{r echo=TRUE}
+t.test(mtcars$mpg ~ mtcars$am, conf.level=0.95)
 ```
