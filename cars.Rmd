@@ -66,3 +66,5 @@ A t-test is appropriate here:
 ```{r echo=TRUE}
 t.test(mtcars$mpg ~ mtcars$am, conf.level=0.95)
 ```
+Given that our p-value (0.001373638) is less than our tested alpha (0.05), we can reject the null hypothesis that there is no difference in MPG, and manual transmission performs better in MPG than automatic transmission, ceteris paribus.
+##
