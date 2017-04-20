@@ -42,4 +42,13 @@ plot(density(mtcars$mpg), main="Kernel density", xlab="MPG")
 ```
 It appears that the data is approximately normal, or perhaps right skewed.
 ### Is an automatic or manual transmission better for MPG?
-
+Create a boxplot of MPG by transmission types.
+```{r echo=TRUE}
+boxplot(mpg ~ am,
+	data = mtcars,
+	xlab = "Transmission",
+	ylab = "Miles per Gallon",
+	main = "MPG by Transmission Type",
+	names = c("Automatic", "Manual")
+)
+```
