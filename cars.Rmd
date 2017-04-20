@@ -1,7 +1,12 @@
-# Motor Tren Car Road Analysis
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Motor Trend Car Road Analysis
 ## Executive Summary
 
-You work for Motor Trend, a magazine about the automobile industry. Looking at a data set of a collection of cars, they are interested in exploring the relationship between a set of variables and miles per gallon (MPG) (outcome). They are particularly interested in whether:
+You work for *Motor Trend*, a magazine about the automobile industry. Looking at a data set of a collection of cars, they are interested in exploring the relationship between a set of variables and miles per gallon (MPG) (outcome). They are particularly interested in whether:
 
 1. An automatic or manual transmission is better for MPG, and
 2. If the difference in MPG can be quantified between automatic and manual transmissions
@@ -15,6 +20,7 @@ library(datasets)
 data(mtcars)
 ```
 It consists of 32 observations on 11 variables:
+
 1. mpg Miles per (US) gallon
 2. cyl Number of cylinders
 3. disp Displacement (in cubic inches)
@@ -26,6 +32,7 @@ It consists of 32 observations on 11 variables:
 9. am Transmission (0 = automatic, 1 = manual)
 10. gear Number of forward gears
 11. carb Number of carburetors
+
 ```{r echo=TRUE}
 summary(mtcars)
 ```
@@ -34,14 +41,14 @@ Begin this exploration with a pairwise scatter plot between all variables (see a
 Then, with the distribution of the dependent variable mpg, assess if it meets assumptions of regression. For this test, a histogram and kernel density would be apropos (see appendix).
 It appears that the data is approximately normal, or perhaps right skewed.
 ### Is an automatic or manual transmission better for MPG?
-First, some dissonance between the two transmission types. A quick summary to follow.
-Automatic:
+First, some dissonance between the two transmission types.
+Automatic transmission MPG:
 ```{r echo=TRUE}
-summary(mtcars[mtcars$am == 0,])
+summary(mtcars[mtcars$am == 0,]$mpg)
 ```
-Manual:
+Manual transmission MPG:
 ```{r echo=TRUE}
-summary(mtcars[mtcars$am == 1,])
+summary(mtcars[mtcars$am == 1,]$mpg)
 ```
 See appendix for boxplot of MPG by transmission types.
 Ostensibly, given that the mean of manual is higher than that of automatic transmissions, we have a good hypothesis that manuals get better mileage than automatic transmissions.
@@ -50,7 +57,9 @@ A t-test is appropriate here:
 t.test(mtcars$mpg ~ mtcars$am, conf.level=0.95)
 ```
 Given that our p-value (0.001373638) is less than our tested alpha (0.05), we can reject the null hypothesis that there is no difference in MPG, and manual transmission performs better in MPG than automatic transmission, ceteris paribus.
+
 ## Quantify the MPG difference between automatic and manual transmissions
+
 In this secion we aim to quantify the MPG differences between transmission types, and attempt to account for any other variables.
 Create a multivariable linear regression with all variables in mtcars:
 ```{r echo=TRUE}
@@ -67,14 +76,14 @@ It appears that the best fitting model includes weight, quarter-mile time, and t
 Weight negatively changes with MPG; quarter-mile time and transmission type positively affects MPG. Every one pound per ton weight increase will cause a decrease of roughly 4 mpg; every increase of quarter-mile time will cause an increase of 1.2 MPG; on average, manual transmission is 2.9 mpg better than automatic transmission.
 This model has an R squared value of approximately 0.85, meaning this model can explain 85% of variance.
 The model is able to explain 85% of variance.
-The residual plots also seems to be randomly scattered, see below:
-```{r echo=TRUE}
-par(mfrow = c(2,2))
-plot(fittedmodel)
-```
+The residual plots also seems to be randomly scattered, as seen in the appendix.
+
 ## Conclusion
+
 On average, manual transmission is better than automatic transmission by 2.9 MPG. However, transmission type is not the only factor accounting for MPG, weight, and acceleration (quarter-mile time) also needs to be considered.
+
 ## Appendix
+
 ```{r}
 pairs(
 	mtcars,
@@ -94,5 +103,9 @@ boxplot(mpg ~ am,
 	main = "MPG by Transmission Type",
 	names = c("Automatic", "Manual")
 )
+```
+```{r echo=TRUE}
+par(mfrow = c(2,2))
+plot(fittedmodel, main="Residual plots")
 ```
 
