@@ -30,16 +30,8 @@ It consists of 32 observations on 11 variables:
 summary(mtcars)
 ```
 ## Exploratory Data Analysis
-Begin this exploration with a pairwise scatter plot between all variables.
-```{r echo=TRUE}
-pairs(mtcars)
-```
-Then, with the distribution of the dependent variable mpg, assess if it meets assumptions of regression. For this test, a histogram and kernel density would be apropos.
-```{r echo=TRUE}
-par(mfrow=c(2,1))
-hist(mtcars$mpg, breaks=10, xlab="MPG", main="MPG histogram")
-plot(density(mtcars$mpg), main="Kernel density", xlab="MPG")
-```
+Begin this exploration with a pairwise scatter plot between all variables (see appendix).
+Then, with the distribution of the dependent variable mpg, assess if it meets assumptions of regression. For this test, a histogram and kernel density would be apropos (see appendix).
 It appears that the data is approximately normal, or perhaps right skewed.
 ### Is an automatic or manual transmission better for MPG?
 First, some dissonance between the two transmission types. A quick summary to follow.
@@ -51,16 +43,7 @@ Manual:
 ```{r echo=TRUE}
 summary(mtcars[mtcars$am == 1,])
 ```
-Create a boxplot of MPG by transmission types.
-```{r echo=TRUE}
-boxplot(mpg ~ am,
-	data = mtcars,
-	xlab = "Transmission",
-	ylab = "Miles per Gallon",
-	main = "MPG by Transmission Type",
-	names = c("Automatic", "Manual")
-)
-```
+See appendix for boxplot of MPG by transmission types.
 Ostensibly, given that the mean of manual is higher than that of automatic transmissions, we have a good hypothesis that manuals get better mileage than automatic transmissions.
 A t-test is appropriate here:
 ```{r echo=TRUE}
@@ -91,3 +74,25 @@ plot(fittedmodel)
 ```
 ## Conclusion
 On average, manual transmission is better than automatic transmission by 2.9 MPG. However, transmission type is not the only factor accounting for MPG, weight, and acceleration (quarter-mile time) also needs to be considered.
+## Appendix
+```{r}
+pairs(
+	mtcars,
+	main = "Pairwise scatter plot"
+)
+```
+```{r echo=FALSE}
+par(mfrow=c(2,1))
+hist(mtcars$mpg, breaks=10, xlab="MPG", main="MPG histogram")
+plot(density(mtcars$mpg), main="Kernel density", xlab="MPG")
+```
+```{r echo=FALSE}
+boxplot(mpg ~ am,
+	data = mtcars,
+	xlab = "Transmission",
+	ylab = "Miles per Gallon",
+	main = "MPG by Transmission Type",
+	names = c("Automatic", "Manual")
+)
+```
+
