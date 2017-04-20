@@ -38,7 +38,7 @@ Then, with the distribution of the dependent variable mpg, assess if it meets as
 ```{r echo=TRUE}
 par(mfrow=c(2,1))
 hist(mtcars$mpg, breaks=10, xlab="MPG", main="MPG histogram")
-plot(density(mtcars$mpg), main="kernel density", xlab="MPG")
+plot(density(mtcars$mpg), main="Kernel density", xlab="MPG")
 ```
 It appears that the data is approximately normal, or perhaps right skewed.
 ### Is an automatic or manual transmission better for MPG?
