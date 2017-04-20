@@ -26,3 +26,20 @@ It consists of 32 observations on 11 variables:
 9. am Transmission (0 = automatic, 1 = manual)
 10. gear Number of forward gears
 11. carb Number of carburetors
+```{r echo=TRUE}
+summary(mtcars)
+```
+## Exploratory Data Analysis
+Begin this exploration with a pairwise scatter plot between all variables.
+```{r echo=TRUE}
+pairs(mtcars)
+```
+Then, with the distribution of the dependent variable mpg, assess if it meets assumptions of regression. For this test, a histogram and kernel density would be apropos.
+```{r echo=TRUE}
+par(mfrow=c(2,1))
+hist(mtcars$mpg, breaks=10, xlab="MPG", main="MPG histogram")
+plot(density(mtcars$mpg), main="kernel density", xlab="MPG")
+```
+It appears that the data is approximately normal, or perhaps right skewed.
+### Is an automatic or manual transmission better for MPG?
+
