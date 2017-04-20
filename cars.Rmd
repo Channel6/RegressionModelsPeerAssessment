@@ -1,8 +1,14 @@
 ---
-output:
-  pdf_document: default
-  html_document: default
+title: "Motor Trend Car Road Analysis"
+author: "Glenn Kerbein"
+date: "April 19, 2017"
+output: pdf_document
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 # Motor Trend Car Road Analysis
 ## Executive Summary
 
