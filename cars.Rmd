@@ -67,4 +67,17 @@ A t-test is appropriate here:
 t.test(mtcars$mpg ~ mtcars$am, conf.level=0.95)
 ```
 Given that our p-value (0.001373638) is less than our tested alpha (0.05), we can reject the null hypothesis that there is no difference in MPG, and manual transmission performs better in MPG than automatic transmission, ceteris paribus.
-##
+## Quantify the MPG difference between automatic and manual transmissions
+In this secion we aim to quantify the MPG differences between transmission types, and attempt to account for any other variables.
+Create a multivariable linear regression with all variables in mtcars:
+```{r echo=TRUE}
+all <- lm(mpg ~ ., data = mtcars)
+summary(all)
+```
+From the coefficients, it looks like wt is a major deciding factor. However, adding all variables may result in noise or overfitting.
+We must choose the best model. Using R's automatic variable selection algorithm, step, R will provide the best linear model using the AIC method.
+```{r echo=TRUE}
+fittedmodel <- step(lm(mpg ~ ., data=mtcars), trace=0)
+summary(fittedmodel)
+```
+
