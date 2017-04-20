@@ -21,7 +21,7 @@ It consists of 32 observations on 11 variables:
 4. hp Gross horsepower
 5. drat Rear axle ratio
 6. wt Weight (lb/1000)
-7. qsec 1/4 mile time
+7. qsec quarter-mile time
 8. vs V/S
 9. am Transmission (0 = automatic, 1 = manual)
 10. gear Number of forward gears
@@ -80,4 +80,12 @@ We must choose the best model. Using R's automatic variable selection algorithm,
 fittedmodel <- step(lm(mpg ~ ., data=mtcars), trace=0)
 summary(fittedmodel)
 ```
-
+It appears that the best fitting model includes weight, quarter-mile time, and transmission type. 
+Weight negatively changes with MPG; quarter-mile time and transmission type positively affects MPG. Every one pound per ton weight increase will cause a decrease of roughly 4 mpg; every increase of quarter-mile time will cause an increase of 1.2 MPG; on average, manual transmission is 2.9 mpg better than automatic transmission.
+This model has an R squared value of approximately 0.85, meaning this model can explain 85% of variance.
+The model is able to explain 85% of variance.
+The residual plots also seems to be randomly scattered, see below:
+```{r echo=TRUE}
+par(mfrow = c(2,2))
+plot(fittedmodel)
+```
